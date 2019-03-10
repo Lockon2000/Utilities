@@ -4,28 +4,35 @@
 
 int main()
 {
-    char ch ;
-    bool whisp_inc = false ;
-    int linecount = 1 ;
+    char c = getchar();
+    bool whitespaceEncountered = true;
+    int lineCount = 1;
 
-    while ( (ch = getchar()) != EOF )
-    {
-        switch (ch)
+    if (c == EOF) {
+        printf("%s\n", "Empty file!!");
+
+        exit(0)
+    }
+    
+    do {
+        switch (c)
         {
-            case '\n': ++linecount ;
+            case '\n': ++lineCount;
             case '\t':
             case '\v':
-            case ' ' : if (!whisp_inc)
+            case ' ' : if (!whitespaceEncountered)
                         {
-                            whisp_inc = true ;
+                            whitespaceEncountered = true;
                             putchar(' ');
                         }
-                        break ;
-            default: putchar(ch);
-                     whisp_inc = false ;
-                     break ;
+                        break;
+            default: putchar(c);
+                     whitespaceEncountered = false;
+                     break;
         }
-    }
+    } while ((c = getchar()) != EOF)
 
-    return 0 ;
+    printf("\n\nNumber of lines = %d\n", lineCount);
+
+    return 0;
 }
